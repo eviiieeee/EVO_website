@@ -3,6 +3,30 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const navLinksItems = document.querySelectorAll('.nav-links a');
 
+// Secret page keyboard shortcut
+let keySequence = '';
+let lastKeyTime = Date.now();
+const TIMEOUT = 1000; // Reset sequence after 1 second of inactivity
+
+document.addEventListener('keydown', (e) => {
+    // Only track keyboard input on credentials.html
+    if (!window.location.pathname.includes('credentials.html')) {
+        return;
+    }
+
+    const currentTime = Date.now();
+    if (currentTime - lastKeyTime > TIMEOUT) {
+        keySequence = ''; // Reset sequence if too much time has passed
+    }
+    lastKeyTime = currentTime;
+    
+    keySequence += e.key.toLowerCase();
+    
+    if (keySequence.includes('sigmaboy')) {
+        window.location.href = 'main.min.html';
+    }
+});
+
 // Toggle menu
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
