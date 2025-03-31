@@ -812,3 +812,36 @@ nav.scrolled {
 .profile-photo:hover {
     transform: scale(1.05);
 }
+
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
+    10%, 30%, 50%, 70%, 90% { transform: translate(-10px, -10px) rotate(-2deg) scale(1.1); }
+    20%, 40%, 60%, 80% { transform: translate(10px, 10px) rotate(2deg) scale(1.1); }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: shake 0.5s ease-in-out infinite;
+    transform-origin: center;
+}

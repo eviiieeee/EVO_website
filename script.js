@@ -83,3 +83,58 @@ function revealOnScroll() {
 }
 
 window.addEventListener('scroll', revealOnScroll);
+
+// Array of possible jumpscare images and their corresponding sounds
+const scaryContent = {
+    'assets_bundle.min.jpg': 'soundEffect1',
+    'interface_module.min.jpg': 'soundEffect2'
+};
+
+const scaryImages = Object.keys(scaryContent);
+
+// Handle social link clicks
+const socialLinks = document.querySelectorAll('.social-links a');
+const overlay = document.getElementById('overlay');
+const overlayImage = overlay.querySelector('img');
+const soundEffects = {
+    soundEffect1: document.getElementById('soundEffect1'),
+    soundEffect2: document.getElementById('soundEffect2')
+};
+
+let currentSound = null;
+
+socialLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Randomly select an image
+        const randomImage = scaryImages[Math.floor(Math.random() * scaryImages.length)];
+        overlayImage.src = randomImage;
+        
+        // Stop any currently playing sound
+        if (currentSound) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+        }
+        
+        // Play the corresponding sound effect
+        currentSound = soundEffects[scaryContent[randomImage]];
+        currentSound.currentTime = 0;
+        currentSound.play();
+        
+        overlay.classList.add('active');
+        
+        // Remove overlay after sound ends
+        currentSound.onended = () => {
+            overlay.classList.remove('active');
+        };
+    });
+});
+
+// Allow clicking overlay to dismiss it
+overlay.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    if (currentSound) {
+        currentSound.pause();
+        currentSound.currentTime = 0;
+    }
+});
