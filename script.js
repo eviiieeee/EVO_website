@@ -1,140 +1,93 @@
-// Mobile Navigation
+// Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
-const navLinksItems = document.querySelectorAll('.nav-links a');
 
-// Secret page keyboard shortcut
-let keySequence = '';
-let lastKeyTime = Date.now();
-const TIMEOUT = 1000; // Reset sequence after 1 second of inactivity
-
-document.addEventListener('keydown', (e) => {
-    // Only track keyboard input on credentials.html
-    if (!window.location.pathname.includes('credentials.html')) {
-        return;
-    }
-
-    const currentTime = Date.now();
-    if (currentTime - lastKeyTime > TIMEOUT) {
-        keySequence = ''; // Reset sequence if too much time has passed
-    }
-    lastKeyTime = currentTime;
-    
-    keySequence += e.key.toLowerCase();
-    
-    if (keySequence.includes('sigmaboy')) {
-        window.location.href = 'main.min.html';
-    }
-});
-
-// Toggle menu
 hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
 });
 
-// Close menu when clicking a link
-navLinksItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
-
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
-});
-
-// Scroll Animation for nav background
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
-
-// Scroll Progress Bar
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrolled / maxHeight) * 100;
-    document.documentElement.style.setProperty('--scroll-width', `${scrollPercent}%`);
-});
-
-// Reveal animations on scroll
-const reveals = document.querySelectorAll('.reveal');
-
-function revealOnScroll() {
-    reveals.forEach(element => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-
-        if (elementTop < windowHeight - elementVisible) {
-            element.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', revealOnScroll);
-
-// Array of possible jumpscare images and their corresponding sounds
-const scaryContent = {
-    'assets_bundle.min.jpg': 'soundEffect1',
-    'interface_module.min.jpg': 'soundEffect2'
-};
-
-const scaryImages = Object.keys(scaryContent);
-
-// Handle social link clicks
-const socialLinks = document.querySelectorAll('.social-links a');
-const overlay = document.getElementById('overlay');
-const overlayImage = overlay.querySelector('img');
-const soundEffects = {
-    soundEffect1: document.getElementById('soundEffect1'),
-    soundEffect2: document.getElementById('soundEffect2')
-};
-
-let currentSound = null;
-
-socialLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+// Smooth Scrolling for Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        // Randomly select an image
-        const randomImage = scaryImages[Math.floor(Math.random() * scaryImages.length)];
-        overlayImage.src = randomImage;
-        
-        // Stop any currently playing sound
-        if (currentSound) {
-            currentSound.pause();
-            currentSound.currentTime = 0;
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Close mobile menu if open
+            if (window.innerWidth <= 768) {
+                navLinks.style.display = 'none';
+            }
         }
-        
-        // Play the corresponding sound effect
-        currentSound = soundEffects[scaryContent[randomImage]];
-        currentSound.currentTime = 0;
-        currentSound.play();
-        
-        overlay.classList.add('active');
-        
-        // Remove overlay after sound ends
-        currentSound.onended = () => {
-            overlay.classList.remove('active');
-        };
     });
 });
 
-// Allow clicking overlay to dismiss it
-overlay.addEventListener('click', () => {
-    overlay.classList.remove('active');
-    if (currentSound) {
-        currentSound.pause();
-        currentSound.currentTime = 0;
+// Navbar Background Change on Scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+    } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
     }
 });
+
+// Contact Form Handling
+const contactForm = document.querySelector('.contact-form');
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(contactForm);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+    
+    // Here you would typically send the data to a server
+    // For now, we'll just show an alert
+    alert('Thank you for your message! We will get back to you soon.');
+    contactForm.reset();
+});
+
+// Animate menu items on scroll
+const menuItems = document.querySelectorAll('.menu-item');
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+menuItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    item.style.transition = 'all 0.6s ease-out';
+    observer.observe(item);
+});
+
+// Add loading animation for images
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('load', function() {
+        this.style.animation = 'fadeIn 0.5s ease-in';
+    });
+});
+
+// Add CSS animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+`;
+document.head.appendChild(style); 

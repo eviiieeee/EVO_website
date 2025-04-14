@@ -3,55 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethan Vito Ocampo | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Bombardiro Crocodillo - Fine Italian Dining</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <nav>
-        <div class="logo">EVO</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="credentials.html">Credentials</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="crocodillo.jpg" alt="Bombardiro Crocodillo" class="logo-img">
+                    <span>Bombardiro Crocodillo</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <section id="home">
-        <div class="bokeh">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="hero">
-            <div class="profile-container">
-                <img src="profile-photo.jpg" alt="Ethan Vito Ocampo" class="profile-photo">
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Bombardiro Crocodillo</h1>
+                <p class="hero-subtitle">Your gonna love our pizza!</p>
+                <div class="hero-buttons">
+                    <a href="menu.html" class="cta-button primary">View Menu</a>
+                    <a href="contact.html" class="cta-button secondary">Book a Table</a>
+                </div>
             </div>
-            <h1>Ethan Vito Ocampo</h1>
-            <p class="subtitle">Web Developer & Designer</p>
-            <div class="cta-buttons">
-                <a href="credentials.html" class="btn primary">Contact Me</a>
+        </section>
+
+        <section class="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-pizza-slice"></i>
+                    <h3>Authentic Italian</h3>
+                    <p>Traditional recipes with our explosive twist</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-fire"></i>
+                    <h3>Explosive Flavors</h3>
+                    <p>Every bite packs a flavor bomb</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Premium Quality</h3>
+                    <p>Only the finest ingredients</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Fresh Daily</h3>
+                    <p>Made fresh every day with love</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-dishes">
+            <h2>Our Signature Dishes</h2>
+            <div class="dishes-grid">
+                <div class="dish-card">
+                    <img src="./images/Margherita-Pizza-deck-oven.jpg" alt="Crocodillo Margherita">
+                    <div class="dish-content">
+                        <h3>Crocodillo Margherita</h3>
+                        <p>Our signature pizza with an explosive twist!</p>
+                        <a href="menu.html#pizzas" class="dish-link">View on Menu</a>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <img src="./images/Spicy-Penne-Pasta_-done.png" alt="Pasta alla Bombardiro">
+                    <div class="dish-content">
+                        <h3>Pasta alla Bombardiro</h3>
+                        <p>Explosive flavors in every bite!</p>
+                        <a href="menu.html#pasta" class="dish-link">View on Menu</a>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <img src="./images/tiramisu-4583.jpg" alt="Tiramisù Bombardiro">
+                    <div class="dish-content">
+                        <h3>Tiramisù Bombardiro</h3>
+                        <p>A sweet explosion of flavor!</p>
+                        <a href="menu.html#desserts" class="dish-link">View on Menu</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"The best Italian food I've ever had! The Crocodillo Margherita is explosive!"</p>
+                    <cite>- Mario R.</cite>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Amazing atmosphere and even better food. A must-visit restaurant!"</p>
+                    <cite>- Luigi B.</cite>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready for an Explosive Dining Experience?</h2>
+                <p>Book your table now and prepare for a flavor adventure!</p>
+                <a href="contact.html" class="cta-button primary">Reserve Now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Opening Hours</h3>
+                <p>Monday - Friday: 11:00 AM - 10:00 PM</p>
+                <p>Saturday - Sunday: 10:00 AM - 11:00 PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bombardiro Crocodillo. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
